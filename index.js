@@ -1,12 +1,12 @@
 import express from 'express';
+import consign from 'consign';
 
-const PORT = 3000;
 const app = express();
 
-app.get('/', (req, res) => {
-    res.json({status: "iTask API"});
-});
-
-app.listen(PORT, () => {
-    console.log(`iTask API - Port ${PORT}`);
-});
+consign()
+    .include("libs/config.js")
+    .then("db.js")
+    .then("libs/middlewares.js")
+    .then("routes")
+    .then("libs/boot.js")
+    .into(app);
