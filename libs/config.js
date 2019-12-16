@@ -1,15 +1,7 @@
-// This file creates a connection settings between Sequelize and SQLite3
-module.exports = {
-    database: "ntask",
-    username: "",
-    password: "",
-    params: {
-        dialect: "sqlite",
-        storage: "ntask.sqlite",
-        define: {
-            underscored: true
-        }
-    },
-    jwtSecret: "Nta$K-AP1",
-    jwtSession: {session: false}
+module.exports = app => {
+    const env = process.env.NODE_ENV;
+    if (env) {
+        return require(`./config.${env}.js`);
+    }
+    return require("./config.development.js");
 };
